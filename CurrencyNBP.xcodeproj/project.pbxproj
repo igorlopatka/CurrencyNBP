@@ -15,6 +15,7 @@
 		452DC82527C2ABC4000C5E61 /* CurrencyNBPUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452DC82427C2ABC4000C5E61 /* CurrencyNBPUITests.swift */; };
 		452DC82727C2ABC4000C5E61 /* CurrencyNBPUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452DC82627C2ABC4000C5E61 /* CurrencyNBPUITestsLaunchTests.swift */; };
 		45E8BD0228035EC900D9324F /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8BD0128035EC900D9324F /* Currency.swift */; };
+		45E8BD062803600B00D9324F /* CurrencyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8BD052803600B00D9324F /* CurrencyListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		452DC82427C2ABC4000C5E61 /* CurrencyNBPUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyNBPUITests.swift; sourceTree = "<group>"; };
 		452DC82627C2ABC4000C5E61 /* CurrencyNBPUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyNBPUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		45E8BD0128035EC900D9324F /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		45E8BD052803600B00D9324F /* CurrencyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			children = (
 				452DC80927C2ABC4000C5E61 /* CurrencyNBPApp.swift */,
 				452DC80B27C2ABC4000C5E61 /* ContentView.swift */,
+				45E8BD052803600B00D9324F /* CurrencyListView.swift */,
 				45E8BD0128035EC900D9324F /* Currency.swift */,
 				452DC80D27C2ABC4000C5E61 /* Assets.xcassets */,
 				452DC80F27C2ABC4000C5E61 /* Preview Content */,
@@ -263,6 +266,7 @@
 				45E8BD0228035EC900D9324F /* Currency.swift in Sources */,
 				452DC80C27C2ABC4000C5E61 /* ContentView.swift in Sources */,
 				452DC80A27C2ABC4000C5E61 /* CurrencyNBPApp.swift in Sources */,
+				45E8BD062803600B00D9324F /* CurrencyListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
