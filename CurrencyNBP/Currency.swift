@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Currency: Decodable {
+struct Currency: Codable {
     
-    struct Rate: Decodable {
+    struct Rate: Codable {
         let currency: String
         let code: String
         let mid: Double
@@ -23,3 +23,4 @@ struct Currency: Decodable {
 
 
 
+    
