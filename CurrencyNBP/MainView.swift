@@ -42,6 +42,7 @@ struct MainView: View {
     }
     
     func fetchCurrencyList() async {
+        
         let urlString = "https://api.nbp.pl/api/exchangerates/tables/a/?format=json"
         
         guard let url = URL(string: urlString) else {
@@ -51,22 +52,16 @@ struct MainView: View {
 
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-
-            
             let items = try JSONDecoder().decode([Currency].self, from: data)
-
-            
             rates = items[0].rates
             loadingState = .loaded
-            
         } catch {
-            
             loadingState = .failed
         }
     }
 }
 
-struct CurrencyListView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
     }
