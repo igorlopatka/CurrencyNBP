@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CurrencyListView: View {
+struct MainView: View {
     
     @State private var loadingState = LoadingState.loading
     @State private var rates = [Rate]()
@@ -34,7 +34,7 @@ struct CurrencyListView: View {
                     Text("Please try again later.")
                 }
             }
-            .navigationTitle("CurrencyNBP ")
+            .navigationTitle("CurrencyNBP")
             .task {
                 await fetchCurrencyList()
             }
@@ -68,6 +68,6 @@ struct CurrencyListView: View {
 
 struct CurrencyListView_Previews: PreviewProvider {
     static var previews: some View {
-        CurrencyListView()
+        MainView()
     }
 }
