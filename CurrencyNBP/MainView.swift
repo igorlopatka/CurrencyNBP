@@ -11,10 +11,14 @@ struct MainView: View {
     
     @State private var loadingState = LoadingState.loading
     @State private var rates = [Rate]()
+    @State private var table = "A"
+    @State private var showingDetails = false
     
     enum LoadingState {
         case loading, loaded, failed
     }
+    
+    let tables = ["A", "B", "C"]
     
     
     var body: some View {
@@ -28,6 +32,8 @@ struct MainView: View {
                                 .font(.headline)
                         }
                     }
+                    .onTapGesture {showingDetails.toggle()}
+                    .sheet(isPresented: $showingDetails) {CurrencyView()}
                 case .loading:
                     ProgressView()
                 case .failed:
@@ -35,6 +41,16 @@ struct MainView: View {
                 }
             }
             .navigationTitle("CurrencyNBP")
+            .toolbar {
+                Menu(content: {
+                    Picker("Table", selection: $table) {
+                        ForEach(tables, id: \.self) { value in
+                            Text(value)
+                        }
+                    }
+                },
+                     label: { Text("Table \(table)") })
+            }
             .task {
                 await fetchCurrencyList()
             }
@@ -42,6 +58,8 @@ struct MainView: View {
     }
     
     func fetchCurrencyList() async {
+        
+        
         
         let urlString = "https://api.nbp.pl/api/exchangerates/tables/a/?format=json"
         
