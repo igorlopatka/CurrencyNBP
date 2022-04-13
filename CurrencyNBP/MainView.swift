@@ -48,20 +48,28 @@ struct MainView: View {
                             Text(value)
                         }
                     }
+                    .onReceive([self.table].publisher.first()) { value in
+                        self.updateTable(table: value)
+                     }
                 },
                      label: { Text("Table \(table)") })
             }
             .task {
-                await fetchCurrencyList()
+                await fetchCurrencyList(table: "a")
             }
         }
     }
     
-    func fetchCurrencyList() async {
-        
-        
-        
-        let urlString = "https://api.nbp.pl/api/exchangerates/tables/a/?format=json"
+    func updateTable(table: String) {
+        let inputTable = table
+        Task {
+            await fetchCurrencyList(table: inputTable)
+        }
+    }
+    
+    func fetchCurrencyList(table: String) async {
+    
+        let urlString = "https://api.nbp.pl/api/exchangerates/tables/\(table)/?format=json"
         
         guard let url = URL(string: urlString) else {
             print("Bad URL: \(urlString)")
