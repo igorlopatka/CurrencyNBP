@@ -8,7 +8,6 @@
 import Foundation
 
 struct Currency: Codable {
-    
     let table: String
     let no: String
     let effectiveDate: String

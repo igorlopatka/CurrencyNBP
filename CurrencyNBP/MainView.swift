@@ -18,6 +18,10 @@ struct MainView: View {
         case loading, loaded, failed
     }
     
+    enum TableType {
+        case rate, buySell
+    }
+    
     let tables = ["A", "B", "C"]
     
     
@@ -33,7 +37,7 @@ struct MainView: View {
                         }
                     }
                     .onTapGesture {showingDetails.toggle()}
-                    .sheet(isPresented: $showingDetails) {CurrencyView()}
+                    .sheet(isPresented: $showingDetails) {DetailsView()}
                 case .loading:
                     ProgressView()
                 case .failed:
