@@ -11,7 +11,8 @@ struct MainView: View {
     
     @State private var loadingState = LoadingState.loading
     @State private var rates = [Rate]()
-    @State private var table = "A"
+    @State private var chosenTable = "A"
+    @State private var tableType = TableType.rate
     @State private var showingDetails = false
     
     enum LoadingState {
@@ -30,25 +31,31 @@ struct MainView: View {
             Section {
                 switch loadingState {
                 case .loaded:
-//                    List {
-//                        ForEach(rates, id: \.code) { rate in
-//                            Text(rate.code)
-//                                .font(.headline)
-//                        }
-//                    }
-//                    .onTapGesture {showingDetails.toggle()}
-//                    .sheet(isPresented: $showingDetails) {DetailsView()}
                     List {
                         ForEach(rates, id: \.self) { rate in
                             NavigationLink {
                                 DetailsView(rate: rate)
                             } label: {
-                                VStack(alignment: .leading) {
-                                    Text(rate.code)
-                                        .font(.headline)
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(rate.code)
+                                            .font(.headline)
+                                        Text(rate.currency)
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                                Spacer()
+                                if chosenTable == tables[2] {
+                                    VStack {
+                                        Text(String(rate.ask ?? 000))
+                                            .font(.title)
+                                        Text(String(rate.bid ?? 000))
+                                            .font(.title)
+                                    }
                                     
-                                    Text(rate.currency)
-                                        .foregroundColor(.secondary)
+                                } else {
+                                    Text(String(rate.mid!))
+                                        .font(.title)
                                 }
                             }
                         }
@@ -62,25 +69,26 @@ struct MainView: View {
             .navigationTitle("CurrencyNBP")
             .toolbar {
                 Menu(content: {
-                    Picker("Table", selection: $table) {
+                    Picker("Table", selection: $chosenTable) {
                         ForEach(tables, id: \.self) { value in
                             Text(value)
                         }
                     }
-                    .onReceive([self.table].publisher.first()) { value in
+                    .onReceive([self.chosenTable].publisher.first()) { value in
                         self.updateTable(table: value)
                     }
                 },
-                     label: { Text("Table \(table)") })
+                     label: { Text("Table \(chosenTable)") })
             }
             .task {
-                await fetchCurrencyList(table: "a")
+                await fetchCurrencyList(table: tables[0])
             }
         }
     }
     
     func updateTable(table: String) {
         let inputTable = table
+        chosenTable = table
         Task {
             await fetchCurrencyList(table: inputTable)
         }
@@ -94,7 +102,6 @@ struct MainView: View {
             print("Bad URL: \(urlString)")
             return
         }
-
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let items = try JSONDecoder().decode([Currency].self, from: data)
