@@ -30,14 +30,30 @@ struct MainView: View {
             Section {
                 switch loadingState {
                 case .loaded:
+//                    List {
+//                        ForEach(rates, id: \.code) { rate in
+//                            Text(rate.code)
+//                                .font(.headline)
+//                        }
+//                    }
+//                    .onTapGesture {showingDetails.toggle()}
+//                    .sheet(isPresented: $showingDetails) {DetailsView()}
+                    
                     List {
-                        ForEach(rates, id: \.code) { rate in
-                            Text(rate.code)
-                                .font(.headline)
+                        ForEach(rates, id: \.self) { rate in
+                            NavigationLink {
+                                DetailsView(rate: rate)
+                            } label: {
+                                VStack(alignment: .leading) {
+                                    Text(rate.code ?? "Unknown Code")
+                                        .font(.headline)
+                                    
+                                    Text(rate.currency ?? "Unknown Author")
+                                        .foregroundColor(.secondary)
+                                }
+                            }
                         }
                     }
-                    .onTapGesture {showingDetails.toggle()}
-                    .sheet(isPresented: $showingDetails) {DetailsView()}
                 case .loading:
                     ProgressView()
                 case .failed:
@@ -54,7 +70,7 @@ struct MainView: View {
                     }
                     .onReceive([self.table].publisher.first()) { value in
                         self.updateTable(table: value)
-                     }
+                    }
                 },
                      label: { Text("Table \(table)") })
             }

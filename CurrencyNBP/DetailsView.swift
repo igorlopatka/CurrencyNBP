@@ -8,13 +8,22 @@
 import SwiftUI
 
 struct DetailsView: View {
+    
+    let rate: Rate
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            Text(rate.code)
+                .font(.headline)
+            
+            Text(rate.currency)
+                .foregroundColor(.secondary)
+        }
     }
 }
 
-struct CurrencyView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailsView()
-    }
-}
+//struct CurrencyView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailsView(rate: )
+//    }
+//}

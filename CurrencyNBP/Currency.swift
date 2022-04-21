@@ -14,10 +14,12 @@ struct Currency: Codable {
     let rates: [Rate]
 }
 
-struct Rate: Codable {
+struct Rate: Codable, Hashable {
     let currency: String
     let code: String
-    let mid: Double
+    let mid: Double?
+    let ask: Double?
+    let bid: Double?
 }
 
 
