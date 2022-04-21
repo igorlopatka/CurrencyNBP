@@ -38,17 +38,16 @@ struct MainView: View {
 //                    }
 //                    .onTapGesture {showingDetails.toggle()}
 //                    .sheet(isPresented: $showingDetails) {DetailsView()}
-                    
                     List {
                         ForEach(rates, id: \.self) { rate in
                             NavigationLink {
                                 DetailsView(rate: rate)
                             } label: {
                                 VStack(alignment: .leading) {
-                                    Text(rate.code ?? "Unknown Code")
+                                    Text(rate.code)
                                         .font(.headline)
                                     
-                                    Text(rate.currency ?? "Unknown Author")
+                                    Text(rate.currency)
                                         .foregroundColor(.secondary)
                                 }
                             }
