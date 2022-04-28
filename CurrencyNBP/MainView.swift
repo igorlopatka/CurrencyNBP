@@ -47,14 +47,13 @@ struct MainView: View {
                                 Spacer()
                                 if chosenTable == tables[2] {
                                     VStack {
-                                        Text(String(rate.ask ?? 000))
+                                        Text(String(rate.ask ?? 0))
                                             .font(.title)
-                                        Text(String(rate.bid ?? 000))
+                                        Text(String(rate.bid ?? 0))
                                             .font(.title)
                                     }
-                                    
                                 } else {
-                                    Text(String(rate.mid!))
+                                    Text(String(format: "%.4f", rate.mid ?? 0))
                                         .font(.title)
                                 }
                             }
@@ -95,7 +94,7 @@ struct MainView: View {
     }
     
     func fetchCurrencyList(table: String) async {
-    
+        
         let urlString = "https://api.nbp.pl/api/exchangerates/tables/\(table)/?format=json"
         
         guard let url = URL(string: urlString) else {

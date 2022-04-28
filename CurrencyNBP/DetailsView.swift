@@ -22,8 +22,3 @@ struct DetailsView: View {
     }
 }
 
-//struct CurrencyView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailsView(rate: )
-//    }
-//}
