@@ -36,29 +36,33 @@ struct MainView: View {
                             NavigationLink {
                                 DetailsView(rate: rate)
                             } label: {
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Text(rate.code)
-                                            .font(.headline)
-                                        Text(rate.currency)
-                                            .foregroundColor(.secondary)
-                                    }
-                                }
-                                Spacer()
-                                if chosenTable == tables[2] {
-                                    VStack {
-                                        Text(String(format: "%.4f", rate.ask ?? 0))
-                                            .font(.title)
-                                        Text(String(format: "%.4f", rate.bid ?? 0))
-                                            .font(.title)
-                                    }
-                                } else {
-                                    VStack {
-                                        Text(String(format: "%.4f", rate.mid ?? 0))
-                                            .font(.title)
+                                VStack {
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            Text(rate.code)
+                                                .font(.headline)
+                                            Text(rate.currency)
+                                                .foregroundColor(.secondary)
+                                        }
+                                        
                                         Spacer()
+                                        
+                                        if chosenTable == tables[2] {
+                                            VStack {
+                                                Text(String(format: "%.4f", rate.ask ?? 0))
+                                                    .font(.title)
+                                                Text(String(format: "%.4f", rate.bid ?? 0))
+                                                    .font(.title)
+                                            }
+                                        } else {
+                                            VStack(alignment: .center) {
+                                                Text(String(format: "%.4f", rate.mid ?? 0))
+                                                    .font(.title)
+                                            }
+                                        }
                                     }
                                 }
+                                .frame(height: 80)
                             }
                         }
                     }
@@ -85,6 +89,9 @@ struct MainView: View {
             .task {
                 await fetchCurrencyList(table: tables[0])
             }
+            .onAppear {
+                updateTable(table: chosenTable)
+            }
         }
     }
     
@@ -94,7 +101,7 @@ struct MainView: View {
         chosenTable = table
         Task {
             await fetchCurrencyList(table: inputTable)
-            
+            loadingState = .loaded
         }
     }
     
