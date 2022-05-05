@@ -87,7 +87,7 @@ struct MainView: View {
                      label: { Text("Table \(chosenTable)") })
             }
             .task {
-                await fetchCurrencyList(table: tables[0])
+                await fetchCurrencyList(table: chosenTable)
             }
             .onAppear {
                 updateTable(table: chosenTable)
