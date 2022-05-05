@@ -47,14 +47,17 @@ struct MainView: View {
                                 Spacer()
                                 if chosenTable == tables[2] {
                                     VStack {
-                                        Text(String(rate.ask ?? 0))
+                                        Text(String(format: "%.4f", rate.ask ?? 0))
                                             .font(.title)
-                                        Text(String(rate.bid ?? 0))
+                                        Text(String(format: "%.4f", rate.bid ?? 0))
                                             .font(.title)
                                     }
                                 } else {
-                                    Text(String(format: "%.4f", rate.mid ?? 0))
-                                        .font(.title)
+                                    VStack {
+                                        Text(String(format: "%.4f", rate.mid ?? 0))
+                                            .font(.title)
+                                        Spacer()
+                                    }
                                 }
                             }
                         }
@@ -86,10 +89,12 @@ struct MainView: View {
     }
     
     func updateTable(table: String) {
+        loadingState = .loading
         let inputTable = table
         chosenTable = table
         Task {
             await fetchCurrencyList(table: inputTable)
+            
         }
     }
     
