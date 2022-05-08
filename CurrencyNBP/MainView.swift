@@ -49,14 +49,14 @@ struct MainView: View {
                                         
                                         if chosenTable == tables[2] {
                                             VStack {
-                                                Text(String(format: "%.4f", rate.ask ?? 0))
+                                                Text(String(format: "%.4f", rate.ask ?? 0) + "zł")
                                                     .font(.title)
-                                                Text(String(format: "%.4f", rate.bid ?? 0))
+                                                Text(String(format: "%.4f", rate.bid ?? 0)  + "zł")
                                                     .font(.title)
                                             }
                                         } else {
                                             VStack(alignment: .center) {
-                                                Text(String(format: "%.4f", rate.mid ?? 0))
+                                                Text(String(format: "%.4f", rate.mid ?? 0)  + "zł")
                                                     .font(.title)
                                             }
                                         }
@@ -67,7 +67,7 @@ struct MainView: View {
                         }
                     }
                 case .loading:
-                    ProgressView()
+                        ProgressView()
                 case .failed:
                     Text("Please try again later.")
                 }
