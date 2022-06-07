@@ -12,20 +12,14 @@ struct MainView: View {
     @State private var loadingState = LoadingState.loading
     @State private var rates = [Rate]()
     @State private var chosenTable = "A"
-    @State private var tableType = TableType.rate
     @State private var showingDetails = false
     
     enum LoadingState {
         case loading, loaded, failed
     }
-    
-    enum TableType {
-        case rate, buySell
-    }
-    
+
     let tables = ["A", "B", "C"]
-    
-    
+        
     var body: some View {
         NavigationView {
             Section {
@@ -49,14 +43,15 @@ struct MainView: View {
                                         
                                         if chosenTable == tables[2] {
                                             VStack {
-                                                Text(String(format: "%.4f", rate.ask ?? 0) + "zł")
+                                                Text(String(format: "%.3f", rate.ask ?? 0) + "zł")
                                                     .font(.title)
-                                                Text(String(format: "%.4f", rate.bid ?? 0)  + "zł")
+                                                Text(String(format: "%.3f", rate.bid ?? 0)  + "zł")
                                                     .font(.title)
                                             }
+                                            .padding()
                                         } else {
                                             VStack(alignment: .center) {
-                                                Text(String(format: "%.4f", rate.mid ?? 0)  + "zł")
+                                                Text(String(format: "%.3f", rate.mid ?? 0)  + "zł")
                                                     .font(.title)
                                             }
                                         }
@@ -67,7 +62,7 @@ struct MainView: View {
                         }
                     }
                 case .loading:
-                        ProgressView()
+                    ProgressView()
                 case .failed:
                     Text("Please try again later.")
                 }
@@ -106,7 +101,6 @@ struct MainView: View {
     }
     
     func fetchCurrencyList(table: String) async {
-        
         let urlString = "https://api.nbp.pl/api/exchangerates/tables/\(table)/?format=json"
         
         guard let url = URL(string: urlString) else {
