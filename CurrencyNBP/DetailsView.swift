@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import Charts
-
 // use iOS 16 Charts
 
 struct DetailsView: View {

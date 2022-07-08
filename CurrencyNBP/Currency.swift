@@ -22,6 +22,6 @@ struct Rate: Codable, Hashable {
     let bid: Double?
 }
 
-
+//update model with detail view NBP structs
 
     
