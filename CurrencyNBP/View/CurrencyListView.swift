@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct CurrencyListView: View {
     
     @State private var loadingState = LoadingState.loading
     @State private var rates = [Rate]()
@@ -28,7 +28,7 @@ struct MainView: View {
                     List {
                         ForEach(rates, id: \.self) { rate in
                             NavigationLink {
-                                DetailsView(rate: rate)
+                                CurrencyDetailsView(rate: rate)
                             } label: {
                                 VStack {
                                     HStack {
@@ -120,6 +120,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        CurrencyListView()
     }
 }

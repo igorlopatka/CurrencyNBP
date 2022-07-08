@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-// use iOS 16 Charts
 
-struct DetailsView: View {
+
+struct CurrencyDetailsView: View {
     
     let rate: Rate
     
