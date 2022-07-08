@@ -22,6 +22,17 @@ struct Rate: Codable, Hashable {
     let bid: Double?
 }
 
-//update model with detail view NBP structs
+struct CurrencyTimeline: Codable{
+    let table: String
+    let currency: String
+    let code: String
+    let rates: [timelineRate]
+}
+
+struct timelineRate: Codable {
+    let no: String
+    let effectiveDate: String
+    let mid: Double
+}
 
     
