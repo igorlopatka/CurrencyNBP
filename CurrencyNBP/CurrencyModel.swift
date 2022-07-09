@@ -22,14 +22,14 @@ struct Rate: Codable, Hashable {
     let bid: Double?
 }
 
-struct CurrencyTimeline: Codable{
+struct CurrencyTimeline: Codable {
     let table: String
     let currency: String
     let code: String
-    let rates: [timelineRate]
+    let rates: [TimeLineRate]
 }
 
-struct timelineRate: Codable {
+struct TimeLineRate: Codable {
     let no: String
     let effectiveDate: String
     let mid: Double
