@@ -28,14 +28,16 @@ class CurrencyViewModel: ObservableObject {
             
             if notTimelineRequest {
                 let standardResponse = try decoder.decode([Currency].self, from: data)
-//                    rates = standardResponse[0].rates
-                //            loadingState = .loaded
+//                rates = standardResponse[0].rates
+//                loadingState = .loaded
             }
             else {
                 let timelineResponse = try decoder.decode(CurrencyTimeline.self, from: data)
+//                rates = timelineResponse[0].rates
+//                loadingState = .loaded
             }
         } catch {
-            //            loadingState = .failed
+//                loadingState = .failed
         }
     }
 }
