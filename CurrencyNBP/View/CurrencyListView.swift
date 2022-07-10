@@ -9,19 +9,7 @@ import SwiftUI
 
 struct CurrencyListView: View {
     
-    
     @StateObject private var viewModel = CurrencyViewModel()
-    
-//    @State private var loadingState = LoadingState.loading
-//    @State private var rates = [Rate]()
-//    @State private var chosenTable = "A"
-//    @State private var showingDetails = false
-    
-    enum LoadingState {
-        case loading, loaded, failed
-    }
-
-    let tables = ["A", "B", "C"]
         
     var body: some View {
         NavigationView {
@@ -44,7 +32,7 @@ struct CurrencyListView: View {
                                         
                                         Spacer()
                                         
-                                        if viewModel.chosenTable == tables[2] {
+                                        if viewModel.chosenTable == viewModel.tables[2] {
                                             VStack {
                                                 Text(String(format: "%.3f", rate.ask ?? 0) + "zł")
                                                     .font(.title)
@@ -74,7 +62,7 @@ struct CurrencyListView: View {
             .toolbar {
                 Menu(content: {
                     Picker("Table", selection: $viewModel.chosenTable) {
-                        ForEach(tables, id: \.self) { value in
+                        ForEach(viewModel.tables, id: \.self) { value in
                             Text(value)
                         }
                     }
