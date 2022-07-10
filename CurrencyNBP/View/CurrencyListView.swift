@@ -9,10 +9,13 @@ import SwiftUI
 
 struct CurrencyListView: View {
     
-    @State private var loadingState = LoadingState.loading
-    @State private var rates = [Rate]()
-    @State private var chosenTable = "A"
-    @State private var showingDetails = false
+    
+    @StateObject private var viewModel = CurrencyViewModel()
+    
+//    @State private var loadingState = LoadingState.loading
+//    @State private var rates = [Rate]()
+//    @State private var chosenTable = "A"
+//    @State private var showingDetails = false
     
     enum LoadingState {
         case loading, loaded, failed
@@ -23,10 +26,10 @@ struct CurrencyListView: View {
     var body: some View {
         NavigationView {
             Section {
-                switch loadingState {
+                switch viewModel.loadingState {
                 case .loaded:
                     List {
-                        ForEach(rates, id: \.self) { rate in
+                        ForEach(viewModel.rates, id: \.self) { rate in
                             NavigationLink {
                                 CurrencyDetailsView(rate: rate)
                             } label: {
@@ -41,7 +44,7 @@ struct CurrencyListView: View {
                                         
                                         Spacer()
                                         
-                                        if chosenTable == tables[2] {
+                                        if viewModel.chosenTable == tables[2] {
                                             VStack {
                                                 Text(String(format: "%.3f", rate.ask ?? 0) + "zł")
                                                     .font(.title)
@@ -70,50 +73,23 @@ struct CurrencyListView: View {
             .navigationTitle("CurrencyNBP")
             .toolbar {
                 Menu(content: {
-                    Picker("Table", selection: $chosenTable) {
+                    Picker("Table", selection: $viewModel.chosenTable) {
                         ForEach(tables, id: \.self) { value in
                             Text(value)
                         }
                     }
-                    .onReceive([self.chosenTable].publisher.first()) { value in
-                        self.updateTable(table: value)
+                    .onReceive([self.viewModel.chosenTable].publisher.first()) { value in
+                        self.viewModel.updateTable(table: value)
                     }
                 },
-                     label: { Text("Table \(chosenTable)") })
+                     label: { Text("Table \(viewModel.chosenTable)") })
             }
             .task {
-                await fetchCurrencyList(table: chosenTable)
+                await viewModel.fetchCurrencyList(table: viewModel.chosenTable)
             }
             .onAppear {
-                updateTable(table: chosenTable)
+                viewModel.updateTable(table: viewModel.chosenTable)
             }
-        }
-    }
-    
-    func updateTable(table: String) {
-        loadingState = .loading
-        let inputTable = table
-        chosenTable = table
-        Task {
-            await fetchCurrencyList(table: inputTable)
-            loadingState = .loaded
-        }
-    }
-    
-    func fetchCurrencyList(table: String) async {
-        let urlString = "https://api.nbp.pl/api/exchangerates/tables/\(table)/?format=json"
-        
-        guard let url = URL(string: urlString) else {
-            print("Bad URL: \(urlString)")
-            return
-        }
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let items = try JSONDecoder().decode([Currency].self, from: data)
-            rates = items[0].rates
-            loadingState = .loaded
-        } catch {
-            loadingState = .failed
         }
     }
 }
