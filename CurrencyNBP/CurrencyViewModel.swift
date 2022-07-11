@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class CurrencyViewModel: ObservableObject {
+@MainActor class CurrencyViewModel: ObservableObject {
     
     @Published var loadingState = LoadingState.loading
     @Published var rates = [Rate]()

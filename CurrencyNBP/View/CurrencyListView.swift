@@ -10,7 +10,7 @@ import SwiftUI
 struct CurrencyListView: View {
     
     @StateObject private var viewModel = CurrencyViewModel()
-        
+    
     var body: some View {
         NavigationView {
             Section {
