@@ -73,7 +73,7 @@ struct CurrencyListView: View {
                      label: { Text("Table \(viewModel.chosenTable)") })
             }
             .task {
-                await viewModel.fetchData(from: "https://api.nbp.pl/api/exchangerates/tables/\(viewModel.chosenTable)/?format=json")
+                await viewModel.fetchCurrencyList(table: viewModel.chosenTable)
             }
             .onAppear {
                 viewModel.updateTable(table: viewModel.chosenTable)
