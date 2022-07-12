@@ -82,7 +82,7 @@ struct CurrencyListView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
+struct CurrencyListView_Previews: PreviewProvider {
     static var previews: some View {
         CurrencyListView()
     }
