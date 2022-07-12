@@ -9,11 +9,13 @@ import SwiftUI
 
 struct CurrencyDetailsView: View {
     
+    @StateObject var viewModel = CurrencyViewModel()
+    
     let rate: Rate
     let table: String
 
+    @State var startDate = Date.now.addingTimeInterval(-604800)
     @State var endDate = Date.now
-    @State var startDate = Date.now
 
     var formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -36,6 +38,12 @@ struct CurrencyDetailsView: View {
             Text(rate.currency)
                 .foregroundColor(.secondary)
         }
+        .onAppear {
+            Task {
+                await viewModel.fetchCurrencyTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: endDate))
+            }
+        }
+        
     }
 }
 
