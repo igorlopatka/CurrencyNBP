@@ -48,6 +48,7 @@
 		452DC82027C2ABC4000C5E61 /* CurrencyNBPUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrencyNBPUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		452DC82427C2ABC4000C5E61 /* CurrencyNBPUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyNBPUITests.swift; sourceTree = "<group>"; };
 		452DC82627C2ABC4000C5E61 /* CurrencyNBPUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyNBPUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		458F2703287DD2C800E12E7E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45A20CB828049A9800D337CB /* CurrencyDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsView.swift; sourceTree = "<group>"; };
 		45E8BD0128035EC900D9324F /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		45E8BD052803600B00D9324F /* CurrencyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListView.swift; sourceTree = "<group>"; };
@@ -108,6 +109,7 @@
 				45EA0A69287845AF00433323 /* CurrencyViewModel.swift */,
 				45EA0A6B287845DE00433323 /* View */,
 				452DC80D27C2ABC4000C5E61 /* Assets.xcassets */,
+				458F2703287DD2C800E12E7E /* Info.plist */,
 				452DC80F27C2ABC4000C5E61 /* Preview Content */,
 			);
 			path = CurrencyNBP;
