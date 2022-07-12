@@ -55,4 +55,21 @@ import SwiftUI
     
     // func for details rateTimeline networking
     
+    func fetchCurrencyTimeline(table: String, rate: Rate, startDate: String, endDate: String) async {
+        let urlString = "https://api.nbp.pl/api/exchangerates/rates/\(table)/\(rate.code)/\(startDate)/\(endDate)/?format=json"
+        
+        guard let url = URL(string: urlString) else {
+            print("Bad URL: \(urlString)")
+            return
+        }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let items = try JSONDecoder().decode(CurrencyTimeline.self, from: data)
+            let timelineRates = items.rates
+            print(timelineRates)
+
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }

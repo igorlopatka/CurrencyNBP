@@ -19,7 +19,7 @@ struct CurrencyListView: View {
                     List {
                         ForEach(viewModel.rates, id: \.self) { rate in
                             NavigationLink {
-                                CurrencyDetailsView(rate: rate)
+                                CurrencyDetailsView(rate: rate, table: viewModel.chosenTable)
                             } label: {
                                 VStack {
                                     HStack {

@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-
 struct CurrencyDetailsView: View {
     
     let rate: Rate
-    
-    @State var startDate = Date.now
+    let table: String
+
     @State var endDate = Date.now
+    @State var startDate = Date.now
 
     var formatter: DateFormatter = {
         let formatter = DateFormatter()
