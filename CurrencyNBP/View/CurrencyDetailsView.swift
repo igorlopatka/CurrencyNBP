@@ -12,8 +12,24 @@ struct CurrencyDetailsView: View {
     
     let rate: Rate
     
+    @State var startDate = Date.now
+    @State var endDate = Date.now
+
+    var formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
     var body: some View {
         VStack(alignment: .leading) {
+            HStack {
+                DatePicker("\(startDate, formatter: formatter)", selection: $startDate, displayedComponents: .date)
+                    .labelsHidden()
+                Text(" - ")
+                DatePicker("\(endDate, formatter: formatter)", selection: $endDate, displayedComponents: .date)
+                    .labelsHidden()
+            }
             Text(rate.code)
                 .font(.headline)
             
