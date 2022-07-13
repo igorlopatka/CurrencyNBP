@@ -15,7 +15,7 @@ struct CurrencyDetailsView: View {
     let rate: Rate
     let table: String
     
-    @State var startDate = Date.now.addingTimeInterval(-604800)
+    @State var startDate = Date.now.addingTimeInterval(-7776000)
     @State var endDate = Date.now
     
     var formatter: DateFormatter = {
@@ -29,7 +29,7 @@ struct CurrencyDetailsView: View {
         VStack(alignment: .leading) {
             Chart {
                 ForEach(viewModel.timeLine, id: \.self) { rate in
-                    BarMark(
+                    LineMark(
                         x: .value("Date", rate.effectiveDate),
                         y: .value("Mid", rate.mid)
                     )
