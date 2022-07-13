@@ -68,7 +68,7 @@ import SwiftUI
             let items = try JSONDecoder().decode(CurrencyTimeline.self, from: data)
             let timelineRates = items.rates
             timeLine = timelineRates
-
+            print(timelineRates)
         } catch {
             print(error.localizedDescription)
         }

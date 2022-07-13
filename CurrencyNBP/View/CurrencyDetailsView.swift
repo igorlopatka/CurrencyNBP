@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct CurrencyDetailsView: View {
     
@@ -26,6 +27,14 @@ struct CurrencyDetailsView: View {
     var body: some View {
         
         VStack(alignment: .leading) {
+            Chart {
+                ForEach(viewModel.timeLine, id: \.self) { rate in
+                    BarMark(
+                        x: .value("Date", rate.effectiveDate),
+                        y: .value("Mid", rate.mid)
+                    )
+                }
+            }
             HStack {
                 DatePicker("\(startDate, formatter: formatter)", selection: $startDate, displayedComponents: .date)
                     .labelsHidden()
