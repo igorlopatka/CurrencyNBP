@@ -9,14 +9,14 @@ import SwiftUI
 
 struct CurrencyDetailsView: View {
     
-    @StateObject var viewModel = CurrencyViewModel()
+    @ObservedObject var viewModel: CurrencyViewModel
     
     let rate: Rate
     let table: String
-
+    
     @State var startDate = Date.now.addingTimeInterval(-604800)
     @State var endDate = Date.now
-
+    
     var formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -24,6 +24,7 @@ struct CurrencyDetailsView: View {
     }()
     
     var body: some View {
+        
         VStack(alignment: .leading) {
             HStack {
                 DatePicker("\(startDate, formatter: formatter)", selection: $startDate, displayedComponents: .date)
@@ -43,7 +44,5 @@ struct CurrencyDetailsView: View {
                 await viewModel.fetchCurrencyTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: endDate))
             }
         }
-        
     }
 }
-
