@@ -11,6 +11,7 @@ import SwiftUI
     
     @Published var loadingState = LoadingState.loading
     @Published var rates = [Rate]()
+    @Published var timeLine = [TimeLineRate]()
     @Published var chosenTable = "A"
     @Published var showingDetails = false
     
@@ -66,7 +67,7 @@ import SwiftUI
             let (data, _) = try await URLSession.shared.data(from: url)
             let items = try JSONDecoder().decode(CurrencyTimeline.self, from: data)
             let timelineRates = items.rates
-            print(timelineRates)
+            timeLine = timelineRates
 
         } catch {
             print(error.localizedDescription)
