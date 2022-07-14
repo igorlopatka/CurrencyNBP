@@ -15,7 +15,7 @@ struct CurrencyDetailsView: View {
     let rate: Rate
     let table: String
     
-    @State var startDate = Date.now.addingTimeInterval(-7776000)
+    @State var startDate = Date.now.addingTimeInterval(-3000000)
     @State var endDate = Date.now
     
     var formatter: DateFormatter = {
@@ -26,7 +26,7 @@ struct CurrencyDetailsView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack() {
             Chart {
                 ForEach(viewModel.timeLine, id: \.self) { rate in
                     LineMark(
@@ -35,6 +35,7 @@ struct CurrencyDetailsView: View {
                     )
                 }
             }
+            .frame(height: 300)
             HStack {
                 DatePicker("\(startDate, formatter: formatter)", selection: $startDate, displayedComponents: .date)
                     .labelsHidden()
