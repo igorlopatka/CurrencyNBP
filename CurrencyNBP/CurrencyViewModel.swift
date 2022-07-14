@@ -35,6 +35,17 @@ import SwiftUI
         }
     }
     
+    func updateChart(table: String, rate: Rate, startDate: String, endDate: String) {
+        let inputTable = table
+        let inputRate = rate
+        let inputStartDate = startDate
+        let inputEndDate = endDate
+        
+        Task {
+            await fetchCurrencyTimeline(table: inputTable, rate: inputRate, startDate: inputStartDate, endDate: inputEndDate)
+        }
+    }
+    
     func fetchCurrencyList(table: String) async {
         let urlString = "https://api.nbp.pl/api/exchangerates/tables/\(table)/?format=json"
         
@@ -52,10 +63,6 @@ import SwiftUI
         }
     }
 
-    // func for Date converting
-    
-    // func for details rateTimeline networking
-    
     func fetchCurrencyTimeline(table: String, rate: Rate, startDate: String, endDate: String) async {
         let urlString = "https://api.nbp.pl/api/exchangerates/rates/\(table)/\(rate.code)/\(startDate)/\(endDate)/?format=json"
         
