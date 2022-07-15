@@ -39,9 +39,19 @@ struct CurrencyDetailsView: View {
             HStack {
                 DatePicker("\(startDate, formatter: formatter)", selection: $startDate, displayedComponents: .date)
                     .labelsHidden()
+                    .onChange(of: startDate) { newDate in
+                        Task {
+                            await viewModel.fetchCurrencyTimeline(table: table, rate: rate, startDate: formatter.string(from: newDate), endDate: formatter.string(from: endDate))
+                        }
+                    }
                 Text(" - ")
                 DatePicker("\(endDate, formatter: formatter)", selection: $endDate, displayedComponents: .date)
                     .labelsHidden()
+                    .onChange(of: endDate) { newDate in
+                        Task {
+                            await viewModel.fetchCurrencyTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: newDate))
+                        }
+                    }
             }
             Text(rate.code)
                 .font(.headline)
