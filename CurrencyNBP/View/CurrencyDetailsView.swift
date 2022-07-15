@@ -25,44 +25,44 @@ struct CurrencyDetailsView: View {
     }()
     
     var body: some View {
-        
-        VStack() {
-            Chart {
-                ForEach(viewModel.timeLine, id: \.self) { rate in
-                    LineMark(
-                        x: .value("Date", rate.effectiveDate),
-                        y: .value("Mid", rate.mid)
-                    )
+        switch viewModel.detailsLoadingState {
+        case .loaded:
+            VStack() {
+                Chart {
+                    ForEach(viewModel.timeLine, id: \.self) { rate in
+                        LineMark(
+                            x: .value("Date", rate.effectiveDate),
+                            y: .value("Mid", rate.mid)
+                        )
+                    }
                 }
-            }
-            .frame(height: 300)
-            HStack {
-                DatePicker("\(startDate, formatter: formatter)", selection: $startDate, displayedComponents: .date)
-                    .labelsHidden()
-                    .onChange(of: startDate) { newDate in
-                        Task {
-                            await viewModel.fetchCurrencyTimeline(table: table, rate: rate, startDate: formatter.string(from: newDate), endDate: formatter.string(from: endDate))
+                .frame(height: 300)
+                HStack {
+                    DatePicker("\(startDate, formatter: formatter)", selection: $startDate, displayedComponents: .date)
+                        .labelsHidden()
+                        .onChange(of: startDate) { newDate in
+                            viewModel.updateTimeline(table: table, rate: rate, startDate: formatter.string(from: newDate), endDate: formatter.string(from: endDate))
                         }
-                    }
-                Text(" - ")
-                DatePicker("\(endDate, formatter: formatter)", selection: $endDate, displayedComponents: .date)
-                    .labelsHidden()
-                    .onChange(of: endDate) { newDate in
-                        Task {
-                            await viewModel.fetchCurrencyTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: newDate))
+                    Text(" - ")
+                    DatePicker("\(endDate, formatter: formatter)", selection: $endDate, displayedComponents: .date)
+                        .labelsHidden()
+                        .onChange(of: endDate) { newDate in
+                            viewModel.updateTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: newDate))
                         }
-                    }
+                }
+                Text(rate.code)
+                    .font(.headline)
+                
+                Text(rate.currency)
+                    .foregroundColor(.secondary)
             }
-            Text(rate.code)
-                .font(.headline)
-            
-            Text(rate.currency)
-                .foregroundColor(.secondary)
-        }
-        .onAppear {
-            Task {
-                await viewModel.fetchCurrencyTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: endDate))
+            .onAppear {
+                viewModel.updateTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: endDate))
             }
+        case .loading:
+            ProgressView()
+        case .failed:
+            Text("Please try again later.")
         }
     }
 }

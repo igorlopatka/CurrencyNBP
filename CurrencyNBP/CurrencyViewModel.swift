@@ -10,6 +10,7 @@ import SwiftUI
 @MainActor class CurrencyViewModel: ObservableObject {
     
     @Published var loadingState = LoadingState.loading
+    @Published var detailsLoadingState = LoadingState.loading
     @Published var rates = [Rate]()
     @Published var timeLine = [TimeLineRate]()
     @Published var chosenTable = "A"
@@ -36,6 +37,9 @@ import SwiftUI
     }
     
     func updateTimeline(table: String, rate: Rate, startDate: String, endDate: String) {
+        
+        detailsLoadingState = .loading
+        
         let inputTable = table
         let inputRate = rate
         let inputStartDate = startDate
@@ -43,6 +47,7 @@ import SwiftUI
         
         Task {
             await fetchCurrencyTimeline(table: inputTable, rate: inputRate, startDate: inputStartDate, endDate: inputEndDate)
+            detailsLoadingState = .loaded
         }
     }
     
@@ -75,9 +80,10 @@ import SwiftUI
             let items = try JSONDecoder().decode(CurrencyTimeline.self, from: data)
             let timelineRates = items.rates
             timeLine = timelineRates
-            print(timelineRates)
+            detailsLoadingState = .loaded
         } catch {
             print(error.localizedDescription)
+            detailsLoadingState = .failed
         }
     }
 }
