@@ -35,7 +35,7 @@ import SwiftUI
         }
     }
     
-    func updateChart(table: String, rate: Rate, startDate: String, endDate: String) {
+    func updateTimeline(table: String, rate: Rate, startDate: String, endDate: String) {
         let inputTable = table
         let inputRate = rate
         let inputStartDate = startDate
