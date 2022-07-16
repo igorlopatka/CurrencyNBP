@@ -10,13 +10,17 @@ import SwiftUI
 @MainActor class CurrencyViewModel: ObservableObject {
     
     @Published var loadingState = LoadingState.loading
-    @Published var detailsLoadingState = LoadingState.loading
+    @Published var detailsLoadingState = DetailsLoadingState.loading
     @Published var rates = [Rate]()
     @Published var timeLine = [TimeLineRate]()
     @Published var chosenTable = "A"
     @Published var showingDetails = false
     
     enum LoadingState {
+        case loading, loaded, failed
+    }
+    
+    enum DetailsLoadingState {
         case loading, loaded, failed
     }
     

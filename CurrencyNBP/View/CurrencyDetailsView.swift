@@ -38,13 +38,13 @@ struct CurrencyDetailsView: View {
                 }
                 .frame(height: 300)
                 HStack {
-                    DatePicker("\(startDate, formatter: formatter)", selection: $startDate, displayedComponents: .date)
+                    DatePicker("\(startDate, formatter: formatter)", selection: $startDate,in: endDate.addingTimeInterval(-8035000)...endDate, displayedComponents: .date)
                         .labelsHidden()
                         .onChange(of: startDate) { newDate in
                             viewModel.updateTimeline(table: table, rate: rate, startDate: formatter.string(from: newDate), endDate: formatter.string(from: endDate))
                         }
                     Text(" - ")
-                    DatePicker("\(endDate, formatter: formatter)", selection: $endDate, displayedComponents: .date)
+                    DatePicker("\(endDate, formatter: formatter)", selection: $endDate, in: startDate...Date.now, displayedComponents: .date)
                         .labelsHidden()
                         .onChange(of: endDate) { newDate in
                             viewModel.updateTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: newDate))
@@ -58,6 +58,7 @@ struct CurrencyDetailsView: View {
             }
             .onAppear {
                 viewModel.updateTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: endDate))
+                viewModel.detailsLoadingState = .loaded
             }
         case .loading:
             ProgressView()
