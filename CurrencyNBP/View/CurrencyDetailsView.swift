@@ -52,16 +52,14 @@ struct CurrencyDetailsView: View {
                 }
                 Text(rate.code)
                     .font(.headline)
-                
                 Text(rate.currency)
                     .foregroundColor(.secondary)
             }
-            .onAppear {
-                viewModel.updateTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: endDate))
-                viewModel.detailsLoadingState = .loaded
-            }
         case .loading:
             ProgressView()
+                .onAppear {
+                    viewModel.updateTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: endDate))
+                }
         case .failed:
             Text("Please try again later.")
         }

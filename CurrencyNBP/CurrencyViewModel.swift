@@ -86,7 +86,6 @@ import SwiftUI
             timeLine = timelineRates
             detailsLoadingState = .loaded
         } catch {
-            print(error.localizedDescription)
             detailsLoadingState = .failed
         }
     }
