@@ -31,11 +31,12 @@ struct CurrencyDetailsView: View {
                 Chart {
                     ForEach(viewModel.timeLine, id: \.self) { rate in
                         LineMark(
-                            x: .value("Date", rate.effectiveDate),
+                            x: .value("Date", viewModel.dateForChart(date: rate.effectiveDate)),
                             y: .value("Mid", rate.mid)
                         )
                     }
                 }
+                .padding()
                 .frame(height: 300)
                 HStack {
                     DatePicker("\(startDate, formatter: formatter)", selection: $startDate,in: endDate.addingTimeInterval(-8035000)...endDate, displayedComponents: .date)
