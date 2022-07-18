@@ -92,20 +92,13 @@ import SwiftUI
     
     func dateForChart(date: String) -> String {
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-            
-        let dateConverted = formatter.date(from: date)!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day, .hour], from: dateConverted)
+        let date = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "dd-MM-yyyy"
         
-        formatter.dateFormat = "D"
-        
-        let finalDate = calendar.date(from:components)!
-        
-        let dateForChart = formatter.string(from: finalDate)
-        
-        return dateForChart
+        let resultString = dateFormatter.string(from: date!)
+        return resultString
     }
 }
