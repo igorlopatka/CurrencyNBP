@@ -11,7 +11,7 @@ import SwiftUI
 struct CurrencyNBPApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CurrencyListView()
         }
     }
 }
