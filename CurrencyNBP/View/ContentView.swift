@@ -34,9 +34,6 @@ struct ContentView: View {
                     .onChange(of: viewModel.chosenTable, perform: { newValue in
                         viewModel.updateTable(table: newValue)
                     })
-//                    .onReceive([self.viewModel.chosenTable].publisher.first()) { value in
-//                        self.viewModel.updateTable(table: value)
-//                    }
                 },
                      label: { Text("Table \(viewModel.chosenTable)") })
             }
