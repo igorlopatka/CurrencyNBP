@@ -63,7 +63,7 @@
 				452DC80927C2ABC4000C5E61 /* CurrencyNBPApp.swift */,
 				45E8BD0128035EC900D9324F /* CurrencyModel.swift */,
 				45EA0A69287845AF00433323 /* CurrencyViewModel.swift */,
-				45EA0A6B287845DE00433323 /* View */,
+				45EA0A6B287845DE00433323 /* Views */,
 				452DC80D27C2ABC4000C5E61 /* Assets.xcassets */,
 				458F2703287DD2C800E12E7E /* Info.plist */,
 				452DC80F27C2ABC4000C5E61 /* Preview Content */,
@@ -79,14 +79,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		45EA0A6B287845DE00433323 /* View */ = {
+		45EA0A6B287845DE00433323 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				45E8BD052803600B00D9324F /* ContentView.swift */,
 				4577038B2915BDD200D99861 /* CurrencyListView.swift */,
 				45A20CB828049A9800D337CB /* CurrencyDetailsView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
