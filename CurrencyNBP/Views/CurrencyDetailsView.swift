@@ -36,6 +36,9 @@ struct CurrencyDetailsView: View {
                         )
                     }
                 }
+                .onAppear {
+                    viewModel.updateTimeline(table: table, rate: rate, startDate: formatter.string(from: startDate), endDate: formatter.string(from: endDate))
+                }
                 .padding()
                 .frame(height: 300)
                 HStack {
@@ -56,6 +59,7 @@ struct CurrencyDetailsView: View {
                 Text(rate.currency)
                     .foregroundColor(.secondary)
             }
+            .navigationTitle(rate.code)
         case .loading:
             ProgressView()
                 .onAppear {

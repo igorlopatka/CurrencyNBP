@@ -51,8 +51,9 @@ import SwiftUI
         
         Task {
             await fetchCurrencyTimeline(table: inputTable, rate: inputRate, startDate: inputStartDate, endDate: inputEndDate)
-            detailsLoadingState = .loaded
         }
+        
+        detailsLoadingState = .loaded
     }
     
     func fetchCurrencyList(table: String) async {
