@@ -32,7 +32,9 @@ struct CurrencyTimeline: Codable {
 struct TimeLineRate: Codable, Hashable {    
     let no: String
     let effectiveDate: String
-    let mid: Double
+    let mid: Double?
+    let ask: Double?
+    let bid: Double?
 }
 
     
