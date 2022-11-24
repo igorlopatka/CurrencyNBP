@@ -16,6 +16,7 @@ import SwiftUI
     @Published var timelineChartData = [TimeLineForChart]()
     @Published var chosenTable = "A"
     @Published var showingDetails = false
+    @Published var searchText = ""
     
     enum LoadingState {
         case loading, loaded, failed
@@ -30,6 +31,22 @@ import SwiftUI
     }
 
     let tables = ["A", "B", "C"]
+    
+    var searchResults: [Rate] {
+        get {
+            if searchText.isEmpty {
+
+                    return rates
+                
+            } else {
+                
+                return rates.filter { $0.code.lowercased().contains(searchText.lowercased())}
+            }
+        }
+        set {
+            objectWillChange.send()
+        }
+    }
         
     func updateTable(table: String) {
         loadingState = .loading
@@ -75,6 +92,9 @@ import SwiftUI
     }
 
     func fetchCurrencyTimeline(table: String, rate: Rate, startDate: String, endDate: String) async {
+        
+        timelineChartData = []
+        
         let urlString = "https://api.nbp.pl/api/exchangerates/rates/\(table)/\(rate.code)/\(startDate)/\(endDate)/?format=json"
         
         guard let url = URL(string: urlString) else {

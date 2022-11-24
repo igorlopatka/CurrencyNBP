@@ -13,7 +13,7 @@ struct CurrencyListView: View {
     
     var body: some View {
         List {
-            ForEach(viewModel.rates, id: \.self) { rate in
+            ForEach(viewModel.searchResults, id: \.self) { rate in
                 NavigationLink {
                     CurrencyDetailsView(viewModel: viewModel, rate: rate, table: viewModel.chosenTable)
                 } label: {
@@ -48,6 +48,7 @@ struct CurrencyListView: View {
                 }
             }
         }
+        .searchable(text: $viewModel.searchText, prompt: "Currency search")
     }
 }
 
