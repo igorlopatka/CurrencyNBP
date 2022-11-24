@@ -23,7 +23,7 @@ struct ContentView: View {
                     Text("Unable to load data.")
                 }
             }
-            .navigationTitle("CurrencyNBP")
+            .navigationTitle("CurrencyNBP 💸")
             .toolbar {
                 Menu(content: {
                     Picker("Table", selection: $viewModel.chosenTable) {
