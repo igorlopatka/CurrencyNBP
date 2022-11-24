@@ -37,4 +37,12 @@ struct TimeLineRate: Codable, Hashable {
     let bid: Double?
 }
 
+struct TimeLineForChart: Hashable {
+    let no: String
+    let effectiveDate: String
+    let price: Double
+    let type: String
+}
+
+
     

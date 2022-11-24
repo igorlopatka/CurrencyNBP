@@ -29,11 +29,12 @@ struct CurrencyDetailsView: View {
         case .loaded:
             VStack() {
                 Chart {
-                    ForEach(viewModel.timeLine, id: \.self) { rate in
-                        LineMark(
-                            x: .value("Date", viewModel.dateForChart(date: rate.effectiveDate)),
-                            y: .value("Mid", rate.mid)
-                        )
+                    ForEach(viewModel.timelineChartData, id: \.self) { rate in
+                            LineMark(
+                                x: .value("Date", viewModel.dateForChart(date: rate.effectiveDate)),
+                                y: .value("Mid", rate.price)
+                            )
+                            .foregroundStyle(by: .value("Type", rate.type))
                     }
                 }
                 .onAppear {

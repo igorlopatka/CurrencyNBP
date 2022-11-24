@@ -13,6 +13,7 @@ import SwiftUI
     @Published var detailsLoadingState = DetailsLoadingState.loading
     @Published var rates = [Rate]()
     @Published var timeLine = [TimeLineRate]()
+    @Published var timelineChartData = [TimeLineForChart]()
     @Published var chosenTable = "A"
     @Published var showingDetails = false
     
@@ -85,6 +86,21 @@ import SwiftUI
             let items = try JSONDecoder().decode(CurrencyTimeline.self, from: data)
             let timelineRates = items.rates
             timeLine = timelineRates
+            
+            if table == tables[2] {
+                for rate in timeLine {
+                    let bidRate = TimeLineForChart(no: rate.no, effectiveDate: rate.effectiveDate, price: rate.bid!, type: "Bid")
+                    timelineChartData.append(bidRate)
+                    let askRate = TimeLineForChart(no: rate.no, effectiveDate: rate.effectiveDate, price: rate.ask!, type: "Ask")
+                    timelineChartData.append(askRate)
+                }
+            } else {
+                for rate in timeLine {
+                    let midRate = TimeLineForChart(no: rate.no, effectiveDate: rate.effectiveDate, price: rate.mid!, type: "Mid")
+                    timelineChartData.append(midRate)
+                }
+            }
+            
             detailsLoadingState = .loaded
         } catch {
             detailsLoadingState = .failed

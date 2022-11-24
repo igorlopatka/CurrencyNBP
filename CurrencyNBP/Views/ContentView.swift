@@ -20,7 +20,7 @@ struct ContentView: View {
                 case .loading:
                     ProgressView()
                 case .failed:
-                    Text("Please try again later.")
+                    Text("Unable to load data.")
                 }
             }
             .navigationTitle("CurrencyNBP")
